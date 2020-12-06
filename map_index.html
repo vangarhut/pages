@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-size: 1rem; font-weight: 400; line-height: 1.5; 
+        background-color: white;
+        color: black;
+      }
+      .header {
+        background: rgba(100%, 100%, 100%, 0.9);
+        color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px 0;
+      }
+      .creditline {
+        color: #E8DAB2
+      }
+    </style>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <title>OpenLayers example</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div class='header'>
+      <label>
+        opacity:<br />
+        <input id="slider" type="range" min="0" max="1" 
+        step="0.01" value="1" oninput="mapWarperLayer.setOpacity(this.value)">
+      </label>
+    </div>
+    <script type="text/javascript">
+     var mapWarperLayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+              url: 'https://mapwarper.net/maps/tile/51185/{z}/{x}/{y}.png'
+            }),
+            opacity: 1
+          });
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.BingMaps({
+                key: 'Asqizn9ZxojutQB-4qQQfQ4ApUZA6MH0__gaPCW80O771-yTofHv_Il-g_JYTeY8',
+                imagerySet:'CanvasLight'
+            })
+          }),
+          mapWarperLayer
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-97.740556, 30.274722]),
+          zoom: 4
+        })
+      });
+    </script>
+  </body>
+</html>
